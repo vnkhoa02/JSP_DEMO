@@ -60,21 +60,21 @@ public class EmployeeDao {
     public StatusCode updateEmployee(Employee employee) {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Api.BASE_URL + Api.UPDATE_EMPLOYEE_DETAILS).newBuilder();
 
-        urlBuilder.addQueryParameter("key", employee.getKey());
-
         String url = urlBuilder.build().toString();
 
         RequestBody formBody = new FormBody.Builder()
+                .add("key", employee.getKey())
                 .add("name", employee.getName())
                 .add("age", String.valueOf(employee.getAge()))
                 .build();
 
-        Request request = new Request.Builder().url(url).post(formBody).build();
+        Request request = new Request.Builder().url(url).put(formBody).build();
 
         StatusCode statusCode = new StatusCode();
         try {
             Response response = client.newCall(request).execute();
             String jsonString = response.body().string();
+            System.out.println(jsonString);
             statusCode = objectMapper.readValue(jsonString, StatusCode.class);
         } catch (Exception e) {
             return new StatusCode();
@@ -89,12 +89,13 @@ public class EmployeeDao {
 
         String url = urlBuilder.build().toString();
 
-        Request request = new Request.Builder().url(url).build();
+        Request request = new Request.Builder().url(url).delete().build();
 
         StatusCode statusCode = new StatusCode();
         try {
             Response response = client.newCall(request).execute();
             String jsonString = response.body().string();
+            System.out.println(jsonString);
             statusCode = objectMapper.readValue(jsonString, StatusCode.class);
         } catch (Exception e) {
             return new StatusCode();

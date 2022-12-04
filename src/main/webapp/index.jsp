@@ -42,7 +42,8 @@
         </form>
         <hr class="w-full"/>
         <div>
-            Status:
+            Result Flag: ${statusCode.resultFlag} <br/>
+            Result Message: ${statusCode.resultMessage} <br/>
         </div>
     </div>
     <div class="w-1/4 h-screen border-solid border-2 border-sky-500">
@@ -62,8 +63,8 @@
         </form>
         <hr class="w-full"/>
         <div>
-            Result Flag: ${resultFlag} <br/>
-            Result Message: ${resultMessage} <br/>
+            Result Flag: ${statusCode.resultFlag} <br/>
+            Result Message: ${statusCode.resultMessage} <br/>
         </div>
     </div>
     <div class="w-1/4 h-screen border-solid border-2 border-red-500">
@@ -77,8 +78,8 @@
         </form>
         <hr class="w-full"/>
         <div>
-            Result Flag: ${resultFlag} <br/>
-            Result Message: ${resultMessage} <br/>
+            Result Flag: ${statusCode.resultFlag} <br/>
+            Result Message: ${statusCode.resultMessage} <br/>
         </div>
     </div>
 </main>

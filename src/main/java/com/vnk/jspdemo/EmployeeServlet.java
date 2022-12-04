@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet(name = "ServletDemo", value = "/employee")
 public class EmployeeServlet extends HttpServlet {
@@ -30,6 +31,14 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String method = req.getParameter("_method");
+        if (Objects.equals(method, "PUT")) {
+            doPut(req, resp);
+            return;
+        } else if (Objects.equals(method, "DELETE")) {
+            doDelete(req, resp);
+            return;
+        }
         String key = req.getParameter("key");
         String name = req.getParameter("name");
         String age = req.getParameter("age");
