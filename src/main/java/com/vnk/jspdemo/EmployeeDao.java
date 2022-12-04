@@ -43,7 +43,10 @@ public class EmployeeDao {
                 .add("age", String.valueOf(employee.getAge()))
                 .build();
 
-        Request request = new Request.Builder().url(url).post(formBody).build();
+        Request request = new Request.Builder().
+                url(url).
+                post(formBody).
+                build();
 
 
         StatusCode statusCode = new StatusCode();
@@ -68,13 +71,15 @@ public class EmployeeDao {
                 .add("age", String.valueOf(employee.getAge()))
                 .build();
 
-        Request request = new Request.Builder().url(url).put(formBody).build();
+        Request request = new Request.Builder().
+                url(url).
+                put(formBody).
+                build();
 
         StatusCode statusCode = new StatusCode();
         try {
             Response response = client.newCall(request).execute();
             String jsonString = response.body().string();
-            System.out.println(jsonString);
             statusCode = objectMapper.readValue(jsonString, StatusCode.class);
         } catch (Exception e) {
             return new StatusCode();
@@ -95,7 +100,6 @@ public class EmployeeDao {
         try {
             Response response = client.newCall(request).execute();
             String jsonString = response.body().string();
-            System.out.println(jsonString);
             statusCode = objectMapper.readValue(jsonString, StatusCode.class);
         } catch (Exception e) {
             return new StatusCode();
