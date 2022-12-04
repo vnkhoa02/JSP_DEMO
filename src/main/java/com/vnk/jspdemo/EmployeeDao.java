@@ -26,7 +26,7 @@ public class EmployeeDao {
             String jsonString = response.body().string();
             employee = objectMapper.readValue(jsonString, Employee.class);
         } catch (Exception e) {
-            return new Employee();
+            e.printStackTrace();
         }
         return employee;
     }
@@ -55,7 +55,7 @@ public class EmployeeDao {
             String jsonString = response.body().string();
             statusCode = objectMapper.readValue(jsonString, StatusCode.class);
         } catch (Exception e) {
-            return new StatusCode();
+            e.printStackTrace();
         }
         return statusCode;
     }
@@ -66,9 +66,9 @@ public class EmployeeDao {
         String url = urlBuilder.build().toString();
 
         RequestBody formBody = new FormBody.Builder()
-                .add("key", employee.getKey())
-                .add("name", employee.getName())
-                .add("age", String.valueOf(employee.getAge()))
+                .add("key", "C1B5")
+                .add("name", "abc")
+                .add("age", String.valueOf(19))
                 .build();
 
         Request request = new Request.Builder().
@@ -82,7 +82,7 @@ public class EmployeeDao {
             String jsonString = response.body().string();
             statusCode = objectMapper.readValue(jsonString, StatusCode.class);
         } catch (Exception e) {
-            return new StatusCode();
+            e.printStackTrace();
         }
         return statusCode;
     }
@@ -102,7 +102,7 @@ public class EmployeeDao {
             String jsonString = response.body().string();
             statusCode = objectMapper.readValue(jsonString, StatusCode.class);
         } catch (Exception e) {
-            return new StatusCode();
+            e.printStackTrace();
         }
         return statusCode;
     }

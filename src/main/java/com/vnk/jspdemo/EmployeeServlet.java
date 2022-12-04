@@ -34,21 +34,20 @@ public class EmployeeServlet extends HttpServlet {
         String method = req.getParameter("_method");
         if (Objects.equals(method, "PUT")) {
             doPut(req, resp);
-            return;
         } else if (Objects.equals(method, "DELETE")) {
             doDelete(req, resp);
-            return;
-        }
-        String key = req.getParameter("key");
-        String name = req.getParameter("name");
-        String age = req.getParameter("age");
-        Employee employee = new Employee();
-        employee.setName(name);
-        employee.setAge(Integer.valueOf(age));
+        } else {
+            String key = req.getParameter("key");
+            String name = req.getParameter("name");
+            String age = req.getParameter("age");
+            Employee employee = new Employee();
+            employee.setName(name);
+            employee.setAge(Integer.valueOf(age));
 
-        StatusCode statusCode = employeeDao.insertEmployee(key, employee);
-        req.getSession().setAttribute("statusCode", statusCode);
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
+            StatusCode statusCode = employeeDao.insertEmployee(key, employee);
+            req.getSession().setAttribute("statusCode", statusCode);
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
+        }
     }
 
     @Override
