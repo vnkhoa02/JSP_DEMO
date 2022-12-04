@@ -15,6 +15,9 @@
                    class="mt-3 border-solid border-2 border-gray-500"><br><br>
             <input type="submit" value="Submit" class="p-3 bg-green-300"/>
         </form>
+        <div>
+            Key <%= request.getSession().getAttribute("myKey") %>
+        </div>
     </div>
     <div class="w-1/4 h-screen border-solid border-2 border-green-500">
         <h1 class="text-3xl font-bold underline">Post</h1>

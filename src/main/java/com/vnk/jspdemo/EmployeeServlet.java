@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = "ServletDemo", value = "/employee")
 public class EmployeeServlet extends HttpServlet {
@@ -23,10 +22,8 @@ public class EmployeeServlet extends HttpServlet {
         String key = req.getParameter("key");
         Employee employee = employeeDao.getEmployeeDetails(key);
 
-        resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
-        out.println("<h1>Hello World from Huong Dan Java</h1>");
-        out.println(String.format("Key %s Name % Age %d ", employee.getKey(), employee.getName(), employee.getAge()));
+        req.getSession().setAttribute("myKey", key);
+        req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 
     @Override
