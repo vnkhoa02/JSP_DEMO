@@ -27,7 +27,8 @@ public class EmployeeDao {
             String jsonString = response.body().string();
             employee = objectMapper.readValue(jsonString, Employee.class);
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            return new Employee();
         }
         return employee;
     }

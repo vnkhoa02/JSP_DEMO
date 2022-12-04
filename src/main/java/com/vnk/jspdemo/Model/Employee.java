@@ -1,5 +1,6 @@
 package com.vnk.jspdemo.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Employee {
@@ -9,7 +10,7 @@ public class Employee {
 
     private Integer age;
 
-    private List<Child> childs;
+    private List<Child> childs = new ArrayList<>();
 
     public Employee() {
     }

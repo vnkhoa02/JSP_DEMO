@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%--<%@ taglib prefix="c" uri="jakarta.tags.core" %>--%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +17,13 @@
                    class="mt-3 border-solid border-2 border-gray-500"><br><br>
             <input type="submit" value="Submit" class="p-3 bg-green-300"/>
         </form>
+        <hr class="w-full"/>
         <div>
-            Key <%= request.getSession().getAttribute("myKey") %>
+            Key: ${employee.key} <br/>
+            Name: ${employee.name} <br/>
+            Age: ${employee.age} <br/>
+            Childs: <br/>
+
         </div>
     </div>
     <div class="w-1/4 h-screen border-solid border-2 border-green-500">

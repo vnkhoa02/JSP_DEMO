@@ -22,7 +22,8 @@ public class EmployeeServlet extends HttpServlet {
         String key = req.getParameter("key");
         Employee employee = employeeDao.getEmployeeDetails(key);
 
-        req.getSession().setAttribute("myKey", key);
+        req.getSession().setAttribute("employee", employee);
+        req.getSession().setAttribute("childs", employee.getChilds());
         req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 
