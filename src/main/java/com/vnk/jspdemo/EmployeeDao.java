@@ -50,7 +50,7 @@ public class EmployeeDao {
 
         Request request = new Request.Builder().
                 url(url).
-                put(formBody).
+                post(formBody).
                 build();
 
         StatusCode statusCode = new StatusCode();
