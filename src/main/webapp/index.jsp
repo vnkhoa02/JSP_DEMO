@@ -62,7 +62,8 @@
         </form>
         <hr class="w-full"/>
         <div>
-            Status
+            Result Flag: ${resultFlag} <br/>
+            Result Message: ${resultMessage} <br/>
         </div>
     </div>
     <div class="w-1/4 h-screen border-solid border-2 border-red-500">
@@ -76,7 +77,8 @@
         </form>
         <hr class="w-full"/>
         <div>
-            Status
+            Result Flag: ${resultFlag} <br/>
+            Result Message: ${resultMessage} <br/>
         </div>
     </div>
 </main>
