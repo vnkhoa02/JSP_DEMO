@@ -4,11 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="https://cdn.tailwindcss.com"></script>
     <title>JSP - Hello World</title>
 </head>
 <body>
 <main class="flex p-3 space-x-3">
+    <div id="err"></div>
     <div class="w-1/4 h-screen border-solid border-2">
         <h1 class="text-3xl font-bold underline">Fetch Employee Details</h1>
         <form action="employee" method="GET">
@@ -74,13 +78,12 @@
     </div>
     <div class="w-1/4 h-screen border-solid border-2 border-red-500">
         <h1 class="text-3xl font-bold underline">Delete</h1>
-        <form action="employee" method="POST">
+        <div>
             <label for="keyDelete">Key:</label>
             <input type="text" id="keyDelete" name="key" value="C1B5"
                    class="mt-3 border-solid border-2 border-gray-500"><br><br>
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" value="delete" class="p-3 bg-red-300"/>
-        </form>
+            <button class="p-3 bg-red-300" onclick="handleDelete()">Submit</button>
+        </div>
         <hr class="w-full"/>
         <div>
             Result Flag: ${statusCode.resultFlag} <br/>
@@ -89,5 +92,39 @@
     </div>
 </main>
 
+<script>
+    function handleDelete() {
+        var key = document.getElementById('keyDelete').value
+        $.ajax({
+            type: 'DELETE',
+            url: 'http://18.220.158.71:8080/edu/mofa/jsptest/emp?key=' + key,
+            header: {
+                'Access-Control-Allow-Origin': '*'
+            },
+            success: function (data, status, xhr) {
+                $('<div class="absolute top-5 right-5 p-3 w-48 bg-green-300">\n' +
+                    '<strong>' + data + '</strong>\n' +
+                    '    </div>').appendTo('#err')
+
+                $('#err').show();
+
+                setTimeout(function () {
+                    $('#err').hide();
+                }, 2000);
+            },
+            error: function (request, status, error) {
+                $('<div class="absolute top-5 right-5 p-3 w-32 bg-red-300">\n' +
+                    '<strong>' + error + '</strong>\n' +
+                    '    </div>').appendTo('#err')
+
+                $('#err').show();
+
+                setTimeout(function () {
+                    $('#err').hide();
+                }, 2000);
+            }
+        });
+    }
+</script>
 </body>
 </html>
