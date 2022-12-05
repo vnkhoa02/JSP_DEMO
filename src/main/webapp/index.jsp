@@ -99,7 +99,7 @@
             type: 'POST',
             url: BASE_URL + '?key=' + key,
             contentType: "application/json; charset=utf-8",
-            body: JSON.stringify({
+            data: JSON.stringify({
                 'name': name,
                 'age': age
             }),
@@ -120,7 +120,7 @@
             type: 'PUT',
             url: BASE_URL,
             contentType: "application/json; charset=utf-8",
-            body: JSON.stringify({
+            data: JSON.stringify({
                 'key': key,
                 'name': name,
                 'age': age
@@ -128,7 +128,7 @@
             success: function (data, status, xhr) {
                 $('<div>\n' +
                     '<strong>' + data + '</strong>\n' +
-                    '    </div>').appendTo('#post-result')
+                    '    </div>').appendTo('#put-result')
             }
         });
     }
