@@ -77,7 +77,7 @@
     var BASE_URL = 'http://18.220.158.71:8080/edu/mofa/jsptest/emp'
 
     function handleSearch() {
-        var key = document.getElementById('keyPost').value
+        var key = document.getElementById('key').value
         $.ajax({
             type: 'GET',
             url: BASE_URL + '?key=' + key,
@@ -98,10 +98,11 @@
         $.ajax({
             type: 'POST',
             url: BASE_URL + '?key=' + key,
-            data: {
-                name: name,
-                age: age
-            },
+            contentType: "application/json; charset=utf-8",
+            body: JSON.stringify({
+                'name': name,
+                'age': age
+            }),
             success: function (data, status, xhr) {
                 $('<div>\n' +
                     '<strong>' + data + '</strong>\n' +
@@ -118,11 +119,12 @@
         $.ajax({
             type: 'PUT',
             url: BASE_URL,
-            data: {
-                key: key,
-                name: name,
-                age: age
-            },
+            contentType: "application/json; charset=utf-8",
+            body: JSON.stringify({
+                'key': key,
+                'name': name,
+                'age': age
+            }),
             success: function (data, status, xhr) {
                 $('<div>\n' +
                     '<strong>' + data + '</strong>\n' +
