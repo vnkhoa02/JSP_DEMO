@@ -15,29 +15,18 @@
     <div id="err"></div>
     <div class="w-1/4 h-screen border-solid border-2">
         <h1 class="text-3xl font-bold underline">Fetch Employee Details</h1>
-        <form action="employee" method="GET">
+        <div>
             <label for="key">Key:</label>
             <input type="text" id="key" name="key" value="C1B5"
                    class="mt-3 border-solid border-2 border-gray-500"><br><br>
-            <input type="submit" value="Submit" class="p-3 bg-green-300"/>
-        </form>
-        <hr class="w-full"/>
-        <div>
-            Key: ${employee.key} <br/>
-            Name: ${employee.name} <br/>
-            Age: ${employee.age} <br/>
-            Childs: <br/>
-            <c:forEach var="child" items="${childs}">
-                <div class="p-2 border-solid border-2 border-gray-500">
-                    Child Name: ${child.childname} <br/>
-                    Child Age: ${child.childage} <br/><br/>
-                </div>
-            </c:forEach>
+            <button class="p-3 bg-green-300" onclick="handleSearch()">Submit</button>
         </div>
+        <hr class="w-full"/>
+        <div id="search-result"></div>
     </div>
     <div class="w-1/4 h-screen border-solid border-2 border-green-500">
         <h1 class="text-3xl font-bold underline">Post</h1>
-        <form action="employee" method="POST">
+        <div>
             <label for="keyPost">Key:</label>
             <input type="text" id="keyPost" name="key" value="C1B5"
                    class="mt-3 border-solid border-2 border-gray-500"><br><br>
@@ -47,17 +36,14 @@
             <label for="agePost">Age:</label>
             <input type="text" id="agePost" name="age" value="20"
                    class="mt-3 border-solid border-2 border-gray-500"><br><br>
-            <input type="submit" value="Submit" class="p-3 bg-green-300"/>
-        </form>
-        <hr class="w-full"/>
-        <div>
-            Result Flag: ${statusCode.resultFlag} <br/>
-            Result Message: ${statusCode.resultMessage} <br/>
+            <button class="p-3 bg-red-300" onclick="handlePost()">Submit</button>
         </div>
+        <hr class="w-full"/>
+        <div id="post-result"></div>
     </div>
     <div class="w-1/4 h-screen border-solid border-2 border-sky-500">
         <h1 class="text-3xl font-bold underline">Put</h1>
-        <form action="employee" method="POST">
+        <div>
             <label for="keyPut">Key:</label>
             <input type="text" id="keyPut" name="key" value="C1B5"
                    class="mt-3 border-solid border-2 border-gray-500"><br><br>
@@ -68,13 +54,11 @@
             <input type="text" id="agePut" name="age" value="20"
                    class="mt-3 border-solid border-2 border-gray-500"><br><br>
             <input type="hidden" name="_method" value="PUT">
-            <input type="submit" value="put" class="p-3 bg-sky-300"/>
-        </form>
-        <hr class="w-full"/>
-        <div>
-            Result Flag: ${statusCode.resultFlag} <br/>
-            Result Message: ${statusCode.resultMessage} <br/>
+            <button class="p-3 bg-red-300" onclick="handlePut()">Submit</button>
         </div>
+        <hr class="w-full"/>
+        <div id="put-result"></div>
+
     </div>
     <div class="w-1/4 h-screen border-solid border-2 border-red-500">
         <h1 class="text-3xl font-bold underline">Delete</h1>
@@ -85,43 +69,77 @@
             <button class="p-3 bg-red-300" onclick="handleDelete()">Submit</button>
         </div>
         <hr class="w-full"/>
-        <div>
-            Result Flag: ${statusCode.resultFlag} <br/>
-            Result Message: ${statusCode.resultMessage} <br/>
-        </div>
+        <div id="delete-result"></div>
     </div>
 </main>
 
 <script>
+    var BASE_URL = 'http://18.220.158.71:8080/edu/mofa/jsptest/emp'
+
+    function handleSearch() {
+        var key = document.getElementById('keyPost').value
+        $.ajax({
+            type: 'GET',
+            url: BASE_URL + '?key=' + key,
+
+            success: function (data, status, xhr) {
+                $('<div>\n' +
+                    '<strong>' + data + '</strong>\n' +
+                    '    </div>').appendTo('#search-result')
+            }
+        });
+    }
+
+    function handlePost() {
+        var key = document.getElementById('keyPost').value
+        var name = document.getElementById('namePost').value
+        var age = document.getElementById('agePost').value
+
+        $.ajax({
+            type: 'POST',
+            url: BASE_URL + '?key=' + key,
+            data: {
+                name: name,
+                age: age
+            },
+            success: function (data, status, xhr) {
+                $('<div>\n' +
+                    '<strong>' + data + '</strong>\n' +
+                    '    </div>').appendTo('#post-result')
+            }
+        });
+    }
+
+    function handlePut() {
+        var key = document.getElementById('keyPut').value
+        var name = document.getElementById('namePut').value
+        var age = document.getElementById('agePut').value
+
+        $.ajax({
+            type: 'PUT',
+            url: BASE_URL,
+            data: {
+                key: key,
+                name: name,
+                age: age
+            },
+            success: function (data, status, xhr) {
+                $('<div>\n' +
+                    '<strong>' + data + '</strong>\n' +
+                    '    </div>').appendTo('#post-result')
+            }
+        });
+    }
+
     function handleDelete() {
         var key = document.getElementById('keyDelete').value
         $.ajax({
             type: 'DELETE',
-            url: 'http://18.220.158.71:8080/edu/mofa/jsptest/emp?key=' + key,
-            header: {
-                'Access-Control-Allow-Origin': '*'
-            },
+            url: BASE_URL + '?key=' + key,
             success: function (data, status, xhr) {
-                $('<div class="absolute top-5 right-5 p-3 w-48 bg-green-300">\n' +
+                $('<div>\n' +
                     '<strong>' + data + '</strong>\n' +
-                    '    </div>').appendTo('#err')
-
-                $('#err').show();
-
-                setTimeout(function () {
-                    $('#err').hide();
-                }, 2000);
-            },
-            error: function (request, status, error) {
-                $('<div class="absolute top-5 right-5 p-3 w-32 bg-red-300">\n' +
-                    '<strong>' + error + '</strong>\n' +
-                    '    </div>').appendTo('#err')
-
-                $('#err').show();
-
-                setTimeout(function () {
-                    $('#err').hide();
-                }, 2000);
+                    '    </div>').appendTo('#delete-result')
             }
         });
     }

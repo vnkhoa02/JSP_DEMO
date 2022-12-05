@@ -1,6 +1,4 @@
 
-b
-2src/main/java/com/vnk/jspdemo/EmployeeServlet.java,4\b\4b3acd7415c251a71ecb3e0cef7e1370a9f65873
 O
 .idea/artifacts/JspDemo_war.xml,7\3\73dd8b0d066d765031ef1ea7d1855211182efb13
 X
@@ -9,15 +7,7 @@ X
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 8
 mvnw.cmd,1\f\1f1763f358c257ea3515417352b82b0165647ad1
-I
-src/main/webapp/index.jsp,8\e\8e6d3b70c9f5b02570779b0441540d45eceb0ded
 _
 /src/main/java/com/vnk/jspdemo/Constant/Api.java,f\b\fb65b646eb77bff790d132b2853e6ddba38d17ad
 a
 1src/main/java/com/vnk/jspdemo/Model/Employee.java,e\e\eec5368c4db20d19caab97865073913b5ca7dc44
-^
-.src/main/java/com/vnk/jspdemo/Model/Child.java,b\9\b9760f349c0dc58399299f2eeaf09bea452f2639
-h
-8src/main/java/com/vnk/jspdemo/StatusCode/StatusCode.java,8\c\8cb62ecf8f283e40f0ab18f03e36de473302a6ad
-^
-.src/main/java/com/vnk/jspdemo/EmployeeDao.java,7\2\72f5771066590bfb2778aca21b036cdc445ccd16
