@@ -78,7 +78,14 @@
     var BASE_URL = 'http://18.220.158.71:8080/edu/mofa/jsptest/emp'
 
     window.onload = function (e) {
-        handleSearch()
+        var params={};
+        window.location.search
+            .replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str,key,value) {
+                    params[key] = value;
+                }
+            );
+        console.log(params.key)
+        console.log(params.name)
     };
 
     function handleSearch() {
