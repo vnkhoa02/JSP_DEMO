@@ -74,7 +74,12 @@
 </main>
 
 <script>
+
     var BASE_URL = 'http://18.220.158.71:8080/edu/mofa/jsptest/emp'
+
+    window.onload = function (e) {
+        handleSearch()
+    };
 
     function handleSearch() {
         var key = document.getElementById('key').value
