@@ -1,0 +1,12 @@
+
+D
+java:S1874M".Remove this use of "create"; it is deprecated.(ïˆ‘¬
+D
+java:S18741".Remove this use of "create"; it is deprecated.(ïˆ‘¬
+M	java:S106m"9Replace this use of System.out or System.err by a logger.(ªÌ¤d
+>
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+>
+java:S1148>"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+>
+java:S1148p"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
