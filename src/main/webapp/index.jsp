@@ -35,9 +35,6 @@
     };
 
     function handleSearch(key) {
-        if (!key) {
-            key = document.getElementById('key').value
-        }
         $.ajax({
             type: 'GET',
             url: BASE_URL + '?key=' + key,
