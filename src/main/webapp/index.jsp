@@ -48,67 +48,35 @@
                         'Age <strong>' + object.age + '</strong><br>\n' +
                         'Raw data <strong>' + data + '</strong><br>\n' +
                         '    </div>').appendTo('#search-result')
+                    callJavaServlet(object.age)
                 } else {
                     $('<div>\n' +
                         '<strong> No Data Found </strong>\n' +
                         '    </div>').appendTo('#search-result')
                 }
+            },
+            error: function (request, status, error) {
+                $('<div>\n' +
+                    '<strong> Err: ' + error + '</strong><br>\n' +
+                    '    </div>').appendTo('#search-result')
             }
         });
     }
 
-    function handlePost() {
-        var key = document.getElementById('keyPost').value
-        var name = document.getElementById('namePost').value
-        var age = document.getElementById('agePost').value
-
+    function callJavaServlet(age) {
+        const url = '${pageContext.request.contextPath}/calculation'
         $.ajax({
-            type: 'POST',
-            url: BASE_URL + '?key=' + key,
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                'name': name,
-                'age': age
-            }),
+            type: 'GET',
+            url: url + '?age=' + age,
+
             success: function (data, status, xhr) {
                 $('<div>\n' +
-                    '<strong>' + data + '</strong>\n' +
-                    '    </div>').appendTo('#post-result')
-            }
-        });
-    }
-
-    function handlePut() {
-        var key = document.getElementById('keyPut').value
-        var name = document.getElementById('namePut').value
-        var age = document.getElementById('agePut').value
-
-        $.ajax({
-            type: 'PUT',
-            url: BASE_URL,
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                'key': key,
-                'name': name,
-                'age': age
-            }),
-            success: function (data, status, xhr) {
+                    'Age + 5 = <strong>' + data + '</strong><br>\n').appendTo('#search-result')
+            },
+            error: function (request, status, error) {
                 $('<div>\n' +
-                    '<strong>' + data + '</strong>\n' +
-                    '    </div>').appendTo('#put-result')
-            }
-        });
-    }
-
-    function handleDelete() {
-        var key = document.getElementById('keyDelete').value
-        $.ajax({
-            type: 'DELETE',
-            url: BASE_URL + '?key=' + key,
-            success: function (data, status, xhr) {
-                $('<div>\n' +
-                    '<strong>' + data + '</strong>\n' +
-                    '    </div>').appendTo('#delete-result')
+                    '<strong> Err: ' + error + '</strong><br>\n' +
+                    '    </div>').appendTo('#search-result')
             }
         });
     }
