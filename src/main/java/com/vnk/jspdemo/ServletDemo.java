@@ -1,10 +1,13 @@
 package com.vnk.jspdemo;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "ServletDemo", value = "/ServletDemo")
 public class ServletDemo extends HttpServlet {
@@ -12,10 +15,10 @@ public class ServletDemo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer age = Integer.valueOf(request.getParameter("age"));
         Integer result = agePlusFive(age);
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(result);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        response.setContentType("application/json;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            out.println(result);
+        }
     }
 
     @Override

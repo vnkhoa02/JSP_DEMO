@@ -70,6 +70,7 @@
             url: url + '?age=' + age,
 
             success: function (data, status, xhr) {
+                console.log(data)
                 $('<div>\n' +
                     'Age + 5 = <strong>' + data + '</strong><br>\n').appendTo('#search-result')
             },
