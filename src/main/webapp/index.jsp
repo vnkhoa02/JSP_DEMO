@@ -64,7 +64,7 @@
     }
 
     function callJavaServlet(age) {
-        const url = '${pageContext.request.contextPath}/calculation'
+        const url = '${pageContext.request.contextPath}/ServletDemo'
         $.ajax({
             type: 'GET',
             url: url + '?age=' + age,

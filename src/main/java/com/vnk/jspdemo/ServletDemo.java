@@ -1,15 +1,13 @@
 package com.vnk.jspdemo;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "ServletCalculation", value = "/calculation")
-public class ServletCalculation extends HttpServlet {
+@WebServlet(name = "ServletDemo", value = "/ServletDemo")
+public class ServletDemo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer age = Integer.valueOf(request.getParameter("age"));
@@ -17,6 +15,7 @@ public class ServletCalculation extends HttpServlet {
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(result);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     @Override
