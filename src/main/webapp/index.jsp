@@ -1,9 +1,6 @@
 <%@page import="java.lang.*" %>
-<%@ page import="okhttp3.HttpUrl" %>
-<%@ page import="okhttp3.Request" %>
-<%@ page import="okhttp3.Response" %>
-<%@ page import="okhttp3.OkHttpClient" %>
 <%@ page import="org.json.JSONObject" %>
+<%@ page import="okhttp3.*" %>
 
 
 <!DOCTYPE html>
@@ -30,6 +27,8 @@
     String name = null;
     Integer age = 0;
 
+    // GET
+
     try {
         Response res = client.newCall(req).execute();
         String json = res.body().string().trim();
@@ -42,8 +41,38 @@
         e.printStackTrace();
     }
 
+    // POST - PUT - DELETE are the same
+
+    String jsonResponse = null;
+    try {
+        HttpUrl.Builder urlBuilder2 = HttpUrl.parse("http://18.220.158.71:8080/edu/mofa/jsptest/emp").newBuilder();
+        MediaType mediaType = MediaType.parse("application/json;charset=utf-8");
+
+        String key2 = request.getParameter("key2"); //get key parameter from URL
+        if (key2 != null) {
+            urlBuilder2.addQueryParameter("key", key2);
+
+            String url2 = urlBuilder2.build().toString();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("name", "YOUR_NAME_HERE");
+            jsonObject.put("age", 19);
+
+            RequestBody formBody = RequestBody.create(mediaType, jsonObject.toString());
+
+            Request postRequest = new Request.Builder().
+                    url(url2)
+                    .post(formBody) // change to .put .delete
+                    .build();
+            Response res = client.newCall(postRequest).execute();
+            jsonResponse = res.body().string().trim();
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
 %>
 Your name <%=name%> <br>
-Your age after 5 years will be <%=age%>
+Your age after 5 years will be <%=age%> <br/>
+Response <%=jsonResponse%>
 </body>
 </html>
